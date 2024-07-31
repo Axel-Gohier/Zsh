@@ -1,0 +1,94 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+final_space: true
+version: 2
+# First block with path and git
+blocks:
+  - type: prompt
+    alignment: left
+    segments:
+      # Path segment
+      - type: path
+        foreground: "#61AFEF"
+        properties:
+          style: full
+        style: plain
+        template: "{{ .Path }} "
+        mapped_locations_enabled: true
+        mapped_locations:
+          "~/Domotique/*": "test"
+
+      # Git segment
+      - type: git
+        style: powerline
+        foreground: "#13c444"
+
+        template: "{{ .HEAD }}{{ if .Rebase }} {{ .Rebase.String }}{{ end }}{{ if .Merge }} {{ .Merge.String }}{{ end }}{{ if .Detached }} {{ .Detached.String }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if .Staging.Changed}} {{.Staging.String}}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}⇣{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}⇡{{ end }}"
+
+        properties:
+          source: cli
+          fetch_status: true
+          fetch_upstream_icon: true
+
+          style: branch
+          branch_max_length: 5
+          truncate_symbol: "…"
+          branch_icon: " "
+
+  # Second block with contexts
+  - type: prompt
+    alignment: right
+    segments:
+      # project version segment
+      - type: project
+        style: plain
+        foreground: "#b33fe5"
+
+      # Dockercontext segment
+      - type: docker
+        style: plain
+        foreground: "#0B59E7"
+        # Only display if the context is different from the default
+        template: '{{ if ne .Context "desktop-linux" }}  {{ .Context }}{{ end }} '
+
+      # Kubecontext segment
+      - type: kubectl
+        style: plain
+        template: "󰠳 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+        foreground: "#0B59E7"
+
+      # python environment segment
+      - type: python
+        style: plain
+        foreground: "#e2da2a"
+        template: "{{ if .Venv }} {{ .Venv }}{{ end }} "
+
+      # Time segment
+      - type: time
+        foreground: "#00C5C7"
+        properties:
+          time_format: "15:04:05"
+        style: plain
+        template: " {{ .CurrentDate | date .Format }} "
+
+  - type: prompt
+    alignment: left
+
+    # Prompt segment
+    segments:
+      - type: "text"
+        style: "plain"
+        foreground: "#b33fe5"
+        template: "❯"
+
+secondary_prompt:
+  foreground: "#b33fe5"
+  template: "󰁕"
+
+transient_prompt:
+  foreground: "#ffffff"
+  background: "transparent"
+  template: "❯"
+  foreground_templates:
+    - "{{if gt .Code 0}}red{{end}}"
+    - "{{if eq .Code 0}}magenta{{end}}"
