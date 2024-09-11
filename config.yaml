@@ -10,13 +10,17 @@ blocks:
       # Path segment
       - type: path
         foreground: "#61AFEF"
-        properties:
-          style: full
         style: plain
         template: "{{ .Path }} "
-        mapped_locations_enabled: true
-        mapped_locations:
-          "~/Domotique/*": "test"
+
+        properties:
+          style: full
+          mapped_locations_enabled: true
+          mapped_locations:
+            # "~": "🏠"
+            #   "~/Documents/*": "📚"
+            "~/Dev": "⌘"
+          #   "~/School": "🎒"
 
       # Git segment
       - type: git
