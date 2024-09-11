@@ -1,8 +1,6 @@
-# ZSH Terminal style
+# ZSH Terminal style with [Oh-my-posh](https://ohmyposh.dev/)
 
-## ![Oh-my-posh](https://ohmyposh.dev/)
-
-### Installation
+## Installation
 
 ```bash
 brew install jandedobbeleer/oh-my-posh/oh-my-posh
@@ -20,6 +18,6 @@ oh-my-posh font install meslo
 
 Then add it to terminal preferences
 
-### CONFIGURATION
+## Configuration
 
 Copy `config.yaml` to `~/.oh-my-posh/config.yaml`
